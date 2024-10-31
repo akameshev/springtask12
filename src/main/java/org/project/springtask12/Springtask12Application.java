@@ -20,23 +20,19 @@ public class Springtask12Application {
 	@Bean
 	public CommandLineRunner run(TaskManager taskManager) {
 		return args -> {
-			// Создание наблюдателя
+
 			ConsoleObserver consoleObserver = new ConsoleObserver();
 			taskManager.addObserver(consoleObserver);
 
-			// Создание фабрики
 			TaskFactory normalTaskFactory = new NormalTaskFactory();
 			TaskFactory urgentTaskFactory = new UrgentTaskFactory();
 
-			// Создание задач
 			Task normalTask = normalTaskFactory.createTask("Normal Task", "This is a normal task.");
 			Task urgentTask = urgentTaskFactory.createTask("Urgent Task", "This is an urgent task.");
 
-			// Добавление задач в менеджер
 			taskManager.addTask(normalTask);
 			taskManager.addTask(urgentTask);
 
-			// Завершение задачи
 			normalTask.complete();
 			taskManager.addTask(normalTask);
 		};
